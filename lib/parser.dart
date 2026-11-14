@@ -150,9 +150,8 @@ class _Slots {
 }
 
 /// Ищет дату и время, помечая использованные слова.
-_Slots _extract(List<String> t, List<bool> used) {
+_Slots _extract(List<String> t, List<bool> used, DateTime now) {
   final r = _Slots();
-  final now = DateTime.now();
   final today = DateTime(now.year, now.month, now.day);
 
   for (var i = 0; i < t.length; i++) {
@@ -309,7 +308,7 @@ Parsed? parseCommand(String text, {CmdType? force, DateTime? now}) {
         final s = _parseDuration(t, u);
         if (s != null) return Parsed(type, when: n.add(Duration(seconds: s)));
       }
-      final slots = _extract(t, used);
+      final slots = _extract(t, used, n);
       if (slots.hour == null) return null;
       final d = slots.date ?? DateTime(n.year, n.month, n.day);
       var when = DateTime(d.year, d.month, d.day, slots.hour!, slots.minute!);
@@ -317,7 +316,7 @@ Parsed? parseCommand(String text, {CmdType? force, DateTime? now}) {
       return Parsed(type, when: when, title: _cleanTitle(t, used));
 
     case CmdType.event:
-      final slots = _extract(t, used);
+      final slots = _extract(t, used, n);
       if (slots.date == null && slots.hour == null) return null;
       final d = slots.date ?? DateTime(n.year, n.month, n.day);
       var when = DateTime(d.year, d.month, d.day, slots.hour ?? 9, slots.minute ?? 0);
