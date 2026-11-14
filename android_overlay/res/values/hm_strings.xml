@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hm_service_label">Help Me: двойное нажатие громкости</string>
+    <string name="hm_service_description">Нужна, чтобы Help Me открывался по двойному нажатию кнопки громкости. Приложение не читает содержимое экрана.</string>
+</resources>
