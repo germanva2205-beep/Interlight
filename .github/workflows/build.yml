@@ -23,6 +23,7 @@ jobs:
         run: flutter create --platforms=android --org com.helpme --project-name help_me .
       - name: Apply native overlay
         run: |
+          rm -f test/widget_test.dart
           cp android_overlay/AndroidManifest.xml android/app/src/main/AndroidManifest.xml
           cp android_overlay/kotlin/*.kt android/app/src/main/kotlin/com/helpme/help_me/
           mkdir -p android/app/src/main/res/xml
